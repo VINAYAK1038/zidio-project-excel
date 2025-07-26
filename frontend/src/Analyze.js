@@ -23,7 +23,7 @@ function Analyze() {
   useEffect(() => {
     const fetchFileData = async () => {
       try {
-        const res = await axios.get('https://zidio-project-excel-backend.onrender.com/api/files/analyze/${encodeURIComponent(fileName)}`);
+        const res = await axios.get(`https://zidio-project-excel-backend.onrender.com/api/files/analyze/${encodeURIComponent(fileName)}`);
         if (res.data.length > 0) {
           setData(res.data);
           const keys = Object.keys(res.data[0]);
