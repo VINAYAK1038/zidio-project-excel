@@ -11,7 +11,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/signup", formData);
+      await axios.post("https://zidio-project-excel-backend.onrender.com/api/signup", formData);
       alert("Signup successful");
       setFormData({ name: "", email: "", password: "" }); // Clear form
     } catch (err) {
