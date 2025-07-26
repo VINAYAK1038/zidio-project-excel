@@ -1,40 +1,4 @@
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
 
-
-// function Login() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-// const navigate = useNavigate();
-// const Pro=()=>{
-//   navigate('/Dashboard')
-// }
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await axios.post("http://localhost:8080/api/login", {
-//         email,
-//         password,
-//       });
-//       alert(res.data.message);
-//     } catch (err) {
-//       alert(err.response.data.message);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleLogin}>
-//       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-//       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-//       <button type="submit" onClick={Pro}>Login</button>
-//     </form>
-//   );
-// }
-
-// export default Login;
 
 
 
@@ -59,7 +23,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/api/login", {
+      const res = await axios.post("https://zidio-project-excel-backend.onrender.com/api/login", {
         email,
         password,
       });
