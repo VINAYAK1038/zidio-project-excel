@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const_URL ="https://zidio-project-excel-frontend-i275.onrender.com";
 // Signup
 router.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
