@@ -6,7 +6,6 @@ const fs = require("fs");
 const path = require("path");
 const XLSX = require("xlsx");
 
-const frontend_URL ="https://zidio-project-excel-frontend-i275.onrender.com"
 dotenv.config();
 
 
