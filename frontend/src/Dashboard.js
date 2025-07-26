@@ -8,7 +8,7 @@ function Dashboard() {
 
   const fetchFiles = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/files/recent");
+      const res = await axios.get("https://zidio-project-excel-backend.onrender.com/api/files/recent");
       setFiles(res.data);
     } catch (err) {
       console.error("Error fetching files:", err);
@@ -27,7 +27,7 @@ function Dashboard() {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:8080/api/files/upload", formData);
+      await axios.post("https://zidio-project-excel-backend.onrender.com/api/files/upload", formData);
       alert("File uploaded");
       fetchFiles(); // Refresh list
     } catch (err) {
@@ -37,7 +37,7 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/files/delete/${id}`);
+      await axios.delete(`https://zidio-project-excel-backend.onrender.com/api/files/delete/${id}`);
       alert("File deleted");
       fetchFiles(); // Refresh list
     } catch (err) {
