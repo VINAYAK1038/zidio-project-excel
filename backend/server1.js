@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect("https://zidio-project-excel-frontend-i275.onrender.com", {
+mongoose.connect("mongodb://127.0.0.1:27017//zidioprojectnew", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
