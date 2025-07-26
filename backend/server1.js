@@ -9,8 +9,7 @@ const XLSX = require("xlsx");
 
 dotenv.config();
 
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://zidio-project-excel-frontend-i275.onrender.com";
-app.use(cors({ origin: FRONTEND_URL }));
+
 
 const app = express();
 app.use(cors());
