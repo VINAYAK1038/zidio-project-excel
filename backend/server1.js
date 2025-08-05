@@ -55,6 +55,15 @@ app.get("/api/files/analyze/:fileName", (req, res) => {
   }
 });
 
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+};
+app.use(cors(corsOptions));
+
+
 // ✅ Start Server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
