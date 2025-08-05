@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const fs = require("fs");
-const path = require("path");
+const path = require("path"); // ✅ Fixed typo
 const XLSX = require("xlsx");
 
 dotenv.config();
@@ -16,7 +16,7 @@ const corsOptions = {
   methods: "GET,POST,PUT,DELETE",
   credentials: true
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // ✅ Only once
 app.use(express.json());
 
 // ✅ MongoDB Connection from .env
@@ -54,15 +54,6 @@ app.get("/api/files/analyze/:fileName", (req, res) => {
     res.status(500).json({ error: "Failed to parse Excel file" });
   }
 });
-
-
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true
-};
-app.use(cors(corsOptions));
-
 
 // ✅ Start Server
 const PORT = process.env.PORT || 8080;
