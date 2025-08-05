@@ -1,24 +1,42 @@
-
-
-
-
+// Signup.js
 import React, { useState } from "react";
-import axios from "axios";
 
 function Signup() {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // ✅ Uses fetch instead of axios
+  const signupUser = async (userData) => {
     try {
-      await axios.post("https://zidio-project-excel-backend.onrender.com/api/signup", formData);
-      alert("Signup successful");
-      setFormData({ name: "", email: "", password: "" }); // Clear form
-    } catch (err) {
-      alert("Signup failed");
+      const response = await fetch("https://zidio-backend.onrender.com/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Signup successful!");
+        console.log(result);
+        setFormData({ name: "", email: "", password: "" }); // Clear form
+      } else {
+        alert("Signup failed: " + (result.message || "Unknown error"));
+        console.error(result);
+      }
+    } catch (error) {
+      alert("Signup error occurred");
+      console.error("Error:", error);
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signupUser(formData);
+  };
+
+  // 💅 Inline styles (same as before)
   const containerStyle = {
     display: "flex",
     height: "100vh",
@@ -73,6 +91,7 @@ function Signup() {
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           placeholder="Name"
           style={inputStyle}
+          required
         />
         <input
           type="email"
@@ -80,6 +99,7 @@ function Signup() {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder="Email"
           style={inputStyle}
+          required
         />
         <input
           type="password"
@@ -87,6 +107,7 @@ function Signup() {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           placeholder="Password"
           style={inputStyle}
+          required
         />
         <button type="submit" style={buttonStyle}>Signup</button>
       </form>
