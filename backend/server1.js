@@ -10,16 +10,17 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Set CORS to allow only frontend URL
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://zidio-project-excel-frontend-i275.onrender.com";
-app.use(cors({ origin: FRONTEND_URL }));
-
+// ✅ Secure CORS setup to allow only your frontend
+const corsOptions = {
+  origin: process.env.FRONTEND_URL, // Comes from .env file
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
-// ✅ MongoDB Connection
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/zidioprojectnew";
-
-mongoose.connect(MONGO_URI, {
+// ✅ MongoDB Connection from .env
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -33,7 +34,7 @@ app.use("/api", authRoutes);
 const fileRoutes = require("./routes/files");
 app.use("/api/files", fileRoutes);
 
-// ✅ Analyze Excel File
+// ✅ Analyze Excel File Route
 app.get("/api/files/analyze/:fileName", (req, res) => {
   const { fileName } = req.params;
   const filePath = path.join(__dirname, "uploads", fileName);
@@ -47,11 +48,9 @@ app.get("/api/files/analyze/:fileName", (req, res) => {
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
     const jsonData = XLSX.utils.sheet_to_json(sheet);
-
-    console.log("✅ File analyzed:", fileName);  // Log analysis
     res.json(jsonData);
   } catch (error) {
-    console.error("❌ Excel parse error:", error);
+    console.error("Excel parse error:", error);
     res.status(500).json({ error: "Failed to parse Excel file" });
   }
 });
